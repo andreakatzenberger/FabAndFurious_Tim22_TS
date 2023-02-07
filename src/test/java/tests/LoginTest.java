@@ -89,13 +89,13 @@ public class LoginTest extends BaseTest {
         driver.switchTo().alert().accept();
 
         //Create object of DriverPage class
-        DriverPage driverPage = new DriverPage(driver);
+        CurrentRideDriverPage currentRideDriverPage = new CurrentRideDriverPage(driver);
 
         //Check if driver is logged in
-        Assert.assertTrue(driverPage.isPageOpened());
+        Assert.assertTrue(currentRideDriverPage.isPageOpened());
 
         //Logout
-        driverPage.logout();
+        currentRideDriverPage.logout();
 
     }
 

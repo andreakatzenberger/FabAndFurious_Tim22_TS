@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DriverPage {
+public class CurrentRideDriverPage {
     private WebDriver driver;
     private static String PAGE_URL = "http://localhost:4200/current-drive-driver";
 
@@ -18,7 +18,10 @@ public class DriverPage {
     @FindBy(how = How.ID, using = "logoutBtn")
     private WebElement logoutButton;
 
-    public DriverPage(WebDriver driver){
+    @FindBy(how = How.ID, using = "endBtn")
+    private WebElement endButton;
+
+    public CurrentRideDriverPage(WebDriver driver){
         this.driver = driver;
         driver.get(PAGE_URL);
 
@@ -32,5 +35,9 @@ public class DriverPage {
 
     public void logout(){
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+    }
+
+    public void clickOnEndRideButton(){
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(endButton)).click();
     }
 }
