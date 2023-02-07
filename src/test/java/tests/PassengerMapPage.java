@@ -1,4 +1,4 @@
-package pages;
+package tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PassengerMapPage {
@@ -19,26 +20,29 @@ public class PassengerMapPage {
     @FindBy(how = How.ID, using = "logoutBtn")
     private WebElement logoutButton;
 
-    @FindBy(id = "find_route")
-    private WebElement heading; //dodati id iks
+//    @FindBy(id = "find_route")
+//    private WebElement heading; //dodati id iks
 
-    @FindBy(id ="calculate")
-    private WebElement calculateBtn; //dodati id iks
+    @FindBy(how = How.ID, using = "from")
+    private WebElement fromInput;
 
-    @FindBy(id ="confirm")
-    private WebElement confirmBtn; //dodati id iks
+    @FindBy(how = How.ID, using = "to")
+    private WebElement toInput;
 
-    @FindBy(id ="from")
-    private WebElement fromBtn; //dodati id iks
+    @FindBy(how = How.ID, using = "showRoute")
+    private WebElement calculateBtn;
 
-    @FindBy(id ="to")
-    private WebElement toBtn; //dodati id iks
+//    @FindBy(css = "div[data-role='custom_select_options']")
+//    private WebElement types;
 
-    @FindBy(css = "div[data-role='custom_select_options']") //?
-    private WebElement types;
+    @FindBy(how = How.ID, using = "vehicleType")
+    private WebElement vehicleType;
 
-    @FindBy(id ="now")
+    @FindBy(how = How.ID, using = "now")
     private WebElement nowBtn;
+
+    @FindBy(how = How.ID, using = "save-btn")
+    private WebElement confirmBtn;
 
     public PassengerMapPage(WebDriver driver){
         this.driver = driver;
@@ -49,7 +53,7 @@ public class PassengerMapPage {
 
     public boolean isPageOpened(){
         return (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.textToBePresentInElement(header, "Order new ride"));
+                .until(ExpectedConditions.textToBePresentInElement(header, "Find route"));
     }
 
     public void logout(){
@@ -57,12 +61,17 @@ public class PassengerMapPage {
     }
 
     private void setDeparture(String from){
-        fromBtn.clear();
-        fromBtn.sendKeys(from);
+        fromInput.clear();
+        fromInput.sendKeys(from);
     }
     private void setDestination(String to){
-        toBtn.clear();
-        toBtn.sendKeys(to);
+        toInput.clear();
+        toInput.sendKeys(to);
+    }
+
+    private void chooseVehicleType(String type) {
+        Select select = new Select(vehicleType);
+        select.selectByValue(type);
     }
 
     private void clickOnCalculateButton(){
@@ -70,19 +79,15 @@ public class PassengerMapPage {
                 .until(ExpectedConditions.elementToBeClickable(calculateBtn)).click();
     }
 
+    private void clickOnNowButton(){
+//        (new WebDriverWait(driver, 10))
+//                .until(ExpectedConditions.elementToBeClickable(nowBtn)).click();
+        nowBtn.click();
+    }
+
     private void clickOnConfirmButton(){
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
-    }
-
-    private void clickOnNowButton(){
-        (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.elementToBeClickable(nowBtn)).click();
-    }
-
-    private void chooseVehicleType(String type) {
-        String locator = String.format(".//div[@data-role='custom_select_option_title'][text() = '%s']", type);
-        types.findElement(By.xpath(locator)).click();
     }
 
     public void createNewRide(String from, String to, String type){

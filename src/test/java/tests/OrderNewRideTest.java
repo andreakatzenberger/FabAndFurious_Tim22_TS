@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.MapUnregisteredPage;
-import pages.PassengerMapPage;
 
 public class OrderNewRideTest extends BaseTest{
 
@@ -15,12 +14,12 @@ public class OrderNewRideTest extends BaseTest{
     static final String PASSWORD_PASSENGER = "marko123";
 
     //new ride
-    static final String FROM = "Bulevar Oslobodjenja 55";
-    static final String TO = "Bulevar vojvode Stepe 31";
-    static final String TYPE = "Van";
+    static final String FROM = "Bulevar Oslobodjenja 55, Novi Sad";
+    static final String TO = "Bulevar vojvode Stepe 31, Novi Sad";
+    static final String TYPE = "STANDARD";
 
     @Test
-    public void orderNewRide(){
+    public void orderNewRideNoAvailableDrivers(){
         //Create object of MapUnregistered class
         MapUnregisteredPage mapUnregisteredPage = new MapUnregisteredPage(driver);
 
