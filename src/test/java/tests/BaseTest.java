@@ -13,7 +13,7 @@ public class BaseTest {
 
     @BeforeSuite
     public void initializeWebDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Svetozar\\Desktop\\PRVI SEMESTAR\\Testiranje softvera\\Vežbe\\Vežbe_07\\selenium\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\filip\\Documents\\GitHub\\FabAndFurious_Tim22_TS\\chromedriver.exe");
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();

@@ -1,5 +1,9 @@
 package tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -24,8 +28,9 @@ public class OrderNewRideTest extends BaseTest{
     static final String TO_INVALID = "Bulevar oslobodjenja 12, Novi Sad";
     static final String TYPE_INVALID = "VAN";
 
-    @Test
-    public void orderNewRideNoAvailableDrivers() {
+
+    @Test(priority = 1)
+    public void orderNewRide() throws InterruptedException {
         //Login as passenger
         loginAsPassenger();
 
@@ -36,20 +41,20 @@ public class OrderNewRideTest extends BaseTest{
         Assert.assertTrue(passengerMapPage.isPageOpened());
 
         //Fill in data for new ride
-        passengerMapPage.createNewRide(FROM_VALID, TO_VALID, TYPE_VALID);
+        passengerMapPage.createNewRide("Bulevar oslobodjenja 12", "Temerinska 12", "STANDARD");
 
         //Check alert
-        Assert.assertEquals((new WebDriverWait(driver, 10)).until(ExpectedConditions.alertIsPresent()).getText(), "Cannot order this ride! There's none available drivers!");
+        Assert.assertEquals((new WebDriverWait(driver, 10)).until(ExpectedConditions.alertIsPresent()).getText(), "Successfully ordered ride!");
 
         //Click 'OK' on alert
         driver.switchTo().alert().accept();
 
-        //Logout
+//        //Logout
         passengerMapPage.logout();
     }
 
-    @Test
-    public void orderNewRide(){
+    @Test(priority = 2)
+    public void orderNewRideNoAvailableDrivers() throws InterruptedException {
         //Login as passenger
         loginAsPassenger();
 
@@ -63,7 +68,7 @@ public class OrderNewRideTest extends BaseTest{
         passengerMapPage.createNewRide("Bulevar oslobodjenja 12", "Temerinska 12", "VAN");
 
         //Check alert
-        Assert.assertEquals((new WebDriverWait(driver, 10)).until(ExpectedConditions.alertIsPresent()).getText(), "Successfully ordered ride!");
+        Assert.assertEquals((new WebDriverWait(driver, 10)).until(ExpectedConditions.alertIsPresent()).getText(), "Cannot order this ride! There's none available drivers!");
 
         //Click 'OK' on alert
         driver.switchTo().alert().accept();
@@ -72,7 +77,7 @@ public class OrderNewRideTest extends BaseTest{
         passengerMapPage.logout();
     }
 
-    @Test
+    @Test(priority = 3)
     public void orderNewRideNoInput(){
         //Login as passenger
         loginAsPassenger();
@@ -97,6 +102,7 @@ public class OrderNewRideTest extends BaseTest{
     }
 
     public void loginAsPassenger(){
+
         //Create object of MapUnregistered class
         MapUnregisteredPage mapUnregisteredPage = new MapUnregisteredPage(driver);
 

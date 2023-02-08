@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,13 +46,17 @@ public class CurrentRideDriverPage {
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
 
-    public void clickOnEndRideButton(){
-        ((JavascriptExecutor) driver)
-                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOf(endButton));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(endButton).click().perform();
+    public void clickOnEndRideButton() throws InterruptedException {
+//        ((JavascriptExecutor) driver)
+//                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+//        (new WebDriverWait(driver, 10))
+//                .until(ExpectedConditions.visibilityOf(endButton));
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(endButton).click().perform();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
+        Thread.sleep(1000);
+        driver.findElement(By.id("endButton")).click();
     }
 
     private void setPanicReason(String reason){

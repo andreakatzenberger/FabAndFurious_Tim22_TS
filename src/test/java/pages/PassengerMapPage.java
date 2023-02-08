@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 public class PassengerMapPage {
     private WebDriver driver;
@@ -45,6 +46,13 @@ public class PassengerMapPage {
 
     @FindBy(how = How.ID, using = "save-btn")
     private WebElement confirmBtn;
+
+    @FindBy(how = How.ID, using = "pets")
+    private WebElement petTransportBtn;
+
+    @FindBy(how = How.ID, using = "pets")
+    private WebElement babyTransportBtn;
+
 
     public PassengerMapPage(WebDriver driver){
         this.driver = driver;
@@ -83,23 +91,31 @@ public class PassengerMapPage {
                 .until(ExpectedConditions.elementToBeClickable(calculateBtn)).click();
     }
 
-    private void clickOnNowButton(){
-        ((JavascriptExecutor) driver)
-                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOf(confirmBtn));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(nowBtn).click().perform();
+    private void clickOnNowButton() throws InterruptedException {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
+        Thread.sleep(1000);
+        driver.findElement(By.id("now")).click();
     }
 
     private void clickOnConfirmButton(){
-        (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
+        driver.findElement(By.id("save-btn")).click();
     }
 
-    public void createNewRide(String from, String to, String type){
+    private void clickOnPetTransportButton(){
+        driver.findElement(By.id("pets")).click();
+    }
+
+    private void clickOnBabyTransportButton(){
+        driver.findElement(By.id("babies")).click();
+    }
+
+    public void createNewRide(String from, String to, String type) throws InterruptedException {
         setDeparture(from);
         setDestination(to);
+        clickOnPetTransportButton();
+        clickOnBabyTransportButton();
         chooseVehicleType(type);
         clickOnCalculateButton();
         clickOnNowButton();
