@@ -105,4 +105,11 @@ public class PassengerMapPage {
         clickOnNowButton();
         clickOnConfirmButton();
     }
+
+    public void createNewRideNoInput(String from, String to, String type){
+        setDeparture(from);
+        setDestination(to);
+        chooseVehicleType(type);
+        clickOnCalculateButton();
+    }
 }
