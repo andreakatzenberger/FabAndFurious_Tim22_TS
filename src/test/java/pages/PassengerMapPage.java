@@ -1,14 +1,18 @@
-package tests;
+package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.swing.*;
 
 public class PassengerMapPage {
     private WebDriver driver;
@@ -32,12 +36,10 @@ public class PassengerMapPage {
     @FindBy(how = How.ID, using = "showRoute")
     private WebElement calculateBtn;
 
-//    @FindBy(css = "div[data-role='custom_select_options']")
-//    private WebElement types;
-
     @FindBy(how = How.ID, using = "vehicleType")
     private WebElement vehicleType;
 
+//    @FindBy(how = How.ID, using = "now")
     @FindBy(how = How.ID, using = "now")
     private WebElement nowBtn;
 
@@ -49,6 +51,8 @@ public class PassengerMapPage {
         driver.get(PAGE_URL);
 
         PageFactory.initElements(driver, this);
+//        JavascriptExecutor executor = (JavascriptExecutor)driver;
+//        executor.executeScript("document.body.style.zoom = '0.75'");
     }
 
     public boolean isPageOpened(){
@@ -80,9 +84,12 @@ public class PassengerMapPage {
     }
 
     private void clickOnNowButton(){
-//        (new WebDriverWait(driver, 10))
-//                .until(ExpectedConditions.elementToBeClickable(nowBtn)).click();
-        nowBtn.click();
+        ((JavascriptExecutor) driver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOf(confirmBtn));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(nowBtn).click().perform();
     }
 
     private void clickOnConfirmButton(){
