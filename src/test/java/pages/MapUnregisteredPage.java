@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,8 @@ public class MapUnregisteredPage {
         driver.get(PAGE_URL);
 
         PageFactory.initElements(driver, this);
+//        JavascriptExecutor executor = (JavascriptExecutor)driver;
+//        executor.executeScript("document.body.style.zoom = '0.75'");
     }
 
     public boolean isPageOpened(){

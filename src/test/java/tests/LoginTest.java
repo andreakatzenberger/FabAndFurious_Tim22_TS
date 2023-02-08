@@ -52,13 +52,13 @@ public class LoginTest extends BaseTest {
         driver.switchTo().alert().accept();
 
         //Create object of PassengerPage class
-        PassengerPage passengerPage = new PassengerPage(driver);
+        PassengerMapPage passengerMapPage = new PassengerMapPage(driver);
 
         //Check if passenger is logged in
-        Assert.assertTrue(passengerPage.isPageOpened());
+        Assert.assertTrue(passengerMapPage.isPageOpened());
 
         //Logout
-        passengerPage.logout();
+        passengerMapPage.logout();
 
     }
 
