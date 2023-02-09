@@ -22,6 +22,7 @@ public class CurrentRideDriverPage {
     private WebElement logoutButton;
 
     @FindBy(how = How.ID, using = "endBtn")
+//    @FindBy(how = How.LINK_TEXT, using = "End")
     private WebElement endButton;
 
     @FindBy(how = How.ID, using = "panicInput")
@@ -56,7 +57,7 @@ public class CurrentRideDriverPage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
         Thread.sleep(1000);
-        driver.findElement(By.id("endButton")).click();
+        driver.findElement(By.id("endBtn")).click();
     }
 
     private void setPanicReason(String reason){
@@ -64,15 +65,17 @@ public class CurrentRideDriverPage {
         panicInput.sendKeys(reason);
     }
 
-    private void clickOnPanicButton(){
+    private void clickOnPanicButton() throws InterruptedException {
         ((JavascriptExecutor) driver)
                 .executeScript("window.scrollTo(0, document.body.scrollHeight)");
         (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOf(endButton));
+                .until(ExpectedConditions.visibilityOf(panicButton));
+        Thread.sleep(500);
         Actions actions = new Actions(driver);
-        actions.moveToElement(panicButton).click().perform();    }
+        actions.moveToElement(panicButton).click().perform();
+    }
 
-    public void setPanic(String reason){
+    public void setPanic(String reason) throws InterruptedException {
         setPanicReason(reason);
         clickOnPanicButton();
     }

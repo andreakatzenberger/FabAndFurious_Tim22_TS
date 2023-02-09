@@ -95,7 +95,9 @@ public class PassengerMapPage {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
-        Thread.sleep(1000);
+//        (new WebDriverWait(driver, 10))
+//                .until(ExpectedConditions.visibilityOf(nowBtn));
+        Thread.sleep(500);
         driver.findElement(By.id("now")).click();
     }
 

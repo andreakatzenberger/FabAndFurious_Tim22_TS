@@ -21,29 +21,29 @@ public class EndRideTest extends BaseTest{
     //panic reason
     static final String PANIC = "Passengers are being very rude!";
 
-//    @Test
-//    public void endCurrentRideExisting() throws InterruptedException {
-//        //Login
-//        loginAsDriver(EMAIL1, PASSWORD1);
-//
-//        //Create object of DriverPage class
-//        CurrentRideDriverPage currentRideDriverPage = new CurrentRideDriverPage(driver);
-//
-//        //Check if driver is logged in
-//        Assert.assertTrue(currentRideDriverPage.isPageOpened());
-//
-//        //End ride
-//        currentRideDriverPage.clickOnEndRideButton();
-//
-//        //Check if alert is successful login
-//        Assert.assertEquals((new WebDriverWait(driver, 10)).until(ExpectedConditions.alertIsPresent()).getText(), "Ended ride successfully!");
-//
-//        //Click 'OK' on alert
-//        driver.switchTo().alert().accept();
-//
-//        //Logout
-//        currentRideDriverPage.logout();
-//    }
+    @Test
+    public void endCurrentRideExisting() throws InterruptedException {
+        //Login
+        loginAsDriver(EMAIL1, PASSWORD1);
+
+        //Create object of DriverPage class
+        CurrentRideDriverPage currentRideDriverPage = new CurrentRideDriverPage(driver);
+
+        //Check if driver is logged in
+        Assert.assertTrue(currentRideDriverPage.isPageOpened());
+
+        //End ride
+        currentRideDriverPage.clickOnEndRideButton();
+
+        //Check if alert is successful login
+        Assert.assertEquals((new WebDriverWait(driver, 10)).until(ExpectedConditions.alertIsPresent()).getText(), "Ended ride successfully!");
+
+        //Click 'OK' on alert
+        driver.switchTo().alert().accept();
+
+        //Logout
+        currentRideDriverPage.logout();
+    }
 
     @Test
     public void endCurrentRideNonExisting() throws InterruptedException {
@@ -69,29 +69,29 @@ public class EndRideTest extends BaseTest{
         currentRideDriverPage.logout();
     }
 
-//    @Test
-//    public void setPanic(){
-//        //Login
-//        loginAsDriver(EMAIL1, PASSWORD1);
-//
-//        //Create object of DriverPage class
-//        CurrentRideDriverPage currentRideDriverPage = new CurrentRideDriverPage(driver);
-//
-//        //Check if driver is logged in
-//        Assert.assertTrue(currentRideDriverPage.isPageOpened());
-//
-//        //Set panic
-//        currentRideDriverPage.setPanic(PANIC);
-//
-//        //Check if alert is successful login
-//        Assert.assertEquals((new WebDriverWait(driver, 60)).until(ExpectedConditions.alertIsPresent()).getText(), "Panic!");
-//
-//        //Click 'OK' on alert
-//        driver.switchTo().alert().accept();
-//
-//        //Logout
-//        currentRideDriverPage.logout();
-//    }
+    @Test
+    public void setPanic() throws InterruptedException {
+        //Login
+        loginAsDriver(EMAIL1, PASSWORD1);
+
+        //Create object of DriverPage class
+        CurrentRideDriverPage currentRideDriverPage = new CurrentRideDriverPage(driver);
+
+        //Check if driver is logged in
+        Assert.assertTrue(currentRideDriverPage.isPageOpened());
+
+        //Set panic
+        currentRideDriverPage.setPanic(PANIC);
+
+        //Check if alert is successful login
+        Assert.assertEquals((new WebDriverWait(driver, 60)).until(ExpectedConditions.alertIsPresent()).getText(), "Panic!");
+
+        //Click 'OK' on alert
+        driver.switchTo().alert().accept();
+
+        //Logout
+        currentRideDriverPage.logout();
+    }
 
     public void loginAsDriver(String email, String password){
         //Create object of MapUnregistered class
